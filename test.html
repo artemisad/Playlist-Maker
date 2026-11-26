@@ -1,0 +1,182 @@
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&display=swap');
+
+  .demo-wrap {
+    max-width: 820px;
+    margin: 20px auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 24px;
+    font-family: 'Cormorant Garamond', Georgia, serif !important;
+  }
+
+  .demo-box {
+    background: #dcd9d2;
+    color: #1e1c1a;
+    padding: 20px;
+    border: 1px solid rgba(30, 28, 26, 0.72);
+  }
+
+  .demo-heading {
+    font-size: 0.85rem !important;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid rgba(30, 28, 26, 0.3);
+  }
+
+  /* --- OPCIÓN A: Reproductor sobre la imagen --- */
+  .card-a {
+    max-width: 240px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .art-a {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #231e1b;
+  }
+
+  .art-a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(0.32) contrast(1.08) brightness(0.92) saturate(0.76);
+  }
+
+  .sp-overlay {
+    position: absolute;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    height: 80px;
+    border-radius: 10px;
+    overflow: hidden;
+    opacity: 0.92;
+    transition: opacity 0.25s ease;
+  }
+
+  /* Si quieres que solo aparezca al pasar el cursor, descomenta estas 2 reglas:
+  .sp-overlay { opacity: 0; }
+  .card-a:hover .sp-overlay { opacity: 0.96; }
+  */
+
+  /* --- OPCIÓN B: Botón ▶ en imagen + Reproductor único abajo --- */
+  .grid-b {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    margin-bottom: 14px;
+  }
+
+  .card-b {
+    text-align: center;
+  }
+
+  .art-b {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
+    background: #231e1b;
+  }
+
+  .art-b img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(0.32) contrast(1.08) brightness(0.92) saturate(0.76);
+  }
+
+  .btn-play-b {
+    position: absolute;
+    bottom: 8px;
+    left: 8px;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: rgba(18, 16, 14, 0.82);
+    border: 1px solid rgba(235, 228, 216, 0.6);
+    color: #f3ece0 !important;
+    text-decoration: none !important;
+    font-size: 0.68rem !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .btn-play-b:hover {
+    background: #b9996b;
+    color: #161412 !important;
+  }
+
+  .sp-dock-b {
+    border-top: 1px solid rgba(30, 28, 26, 0.35);
+    padding-top: 10px;
+  }
+
+  .song-t {
+    font-size: 0.78rem !important;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-top: 6px;
+  }
+
+  .artist-t {
+    font-size: 0.84rem !important;
+    font-style: italic;
+    font-weight: 600;
+  }
+</style>
+
+<div class="demo-wrap">
+  <!-- OPCIÓN A -->
+  <div class="demo-box">
+    <p class="demo-heading">Opción A · Spotify sobre cada imagen</p>
+    <div class="card-a">
+      <div class="art-a">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Fran%C3%A7ois_Boucher_-_Putti_with_Birds_-_Google_Art_Project.jpg/640px-Fran%C3%A7ois_Boucher_-_Putti_with_Birds_-_Google_Art_Project.jpg" alt="Angels on a Satellite">
+        <div class="sp-overlay">
+          <iframe src="https://open.spotify.com/embed/track/37723978483948?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+        </div>
+      </div>
+      <p class="song-t">ANGELS ON A SATELLITE</p>
+      <p class="artist-t">Magdalena Bay</p>
+    </div>
+  </div>
+
+  <!-- OPCIÓN B -->
+  <div class="demo-box">
+    <p class="demo-heading">Opción B · Botón ▶ + Barra inferior</p>
+    <div class="grid-b">
+      <div class="card-b">
+        <div class="art-b">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Jan_Davidsz._de_Heem_-_Flowers_in_a_Glass_Vase_-_WGA11257.jpg/640px-Jan_Davidsz._de_Heem_-_Flowers_in_a_Glass_Vase_-_WGA11257.jpg" alt="Born to Die">
+          <a class="btn-play-b" href="https://open.spotify.com/embed/track/2K87XMYnUMqLcX3zvtAF4G?utm_source=generator&theme=0" target="demoSpDock" title="Cargar canción">▶</a>
+        </div>
+        <p class="song-t">BORN TO DIE</p>
+        <p class="artist-t">Lana Del Rey</p>
+      </div>
+
+      <div class="card-b">
+        <div class="art-b">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Georges_de_La_Tour_-_The_Penitent_Magdalen_-_Google_Art_Project.jpg/640px-Georges_de_La_Tour_-_The_Penitent_Magdalen_-_Google_Art_Project.jpg" alt="Wuthering Heights">
+          <a class="btn-play-b" href="https://open.spotify.com/embed/track/5YSI1311X8t31PBjkBG4CZ?utm_source=generator&theme=0" target="demoSpDock" title="Cargar canción">▶</a>
+        </div>
+        <p class="song-t">WUTHERING HEIGHTS</p>
+        <p class="artist-t">Kate Bush</p>
+      </div>
+    </div>
+
+    <div class="sp-dock-b">
+      <iframe name="demoSpDock" src="https://open.spotify.com/embed/track/2K87XMYnUMqLcX3zvtAF4G?utm_source=generator&theme=0" width="100%" height="80" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+    </div>
+  </div>
+</div>
