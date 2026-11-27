@@ -87,7 +87,7 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 6px;
+      gap: 7px;
     }
 
     .btn {
@@ -95,10 +95,10 @@
       border: 1px solid rgba(220, 217, 210, 0.28);
       color: #e8e4dc;
       font-family: 'Cormorant Garamond', serif !important;
-      font-size: 0.78rem !important;
+      font-size: 0.8rem !important;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 5px 10px;
+      padding: 5px 11px;
       cursor: pointer;
       transition: all 0.22s ease;
       display: inline-flex;
@@ -127,17 +127,6 @@
     .btn-accent:hover {
       background: #cbb086;
       border-color: #cbb086;
-    }
-
-    .btn-spotify {
-      background: #1db954;
-      color: #0e1410;
-      border-color: #1db954;
-    }
-
-    .btn-spotify:hover {
-      background: #25d363;
-      border-color: #25d363;
     }
 
     /* Panel de Personalización */
@@ -295,7 +284,7 @@
       max-width: 820px;
       background-color: var(--paper-base);
       color: var(--ink-primary);
-      padding: clamp(16px, 3.6vw, 30px) clamp(14px, 4vw, 34px) clamp(16px, 3.2vw, 26px);
+      padding: clamp(16px, 3.6vw, 30px) clamp(14px, 4vw, 34px) clamp(20px, 4.2vw, 36px);
       box-shadow:
         0 28px 70px rgba(0, 0, 0, 0.72),
         0 4px 16px rgba(0, 0, 0, 0.45),
@@ -410,19 +399,18 @@
       padding-right: 0;
     }
 
-    /* Pie de página del póster */
+    /* Pie de página por fuera de la box de la música */
     .poster-footer {
-      position: relative;
-      z-index: 4;
+      width: 100%;
+      max-width: 820px;
       text-align: center;
-      padding-top: clamp(10px, 1.8vw, 14px);
+      margin-top: 16px;
       font-family: 'Cormorant Garamond', Georgia, serif !important;
-      font-size: clamp(0.62rem, 1.25vw, 0.74rem) !important;
+      font-size: clamp(0.72rem, 1.35vw, 0.84rem) !important;
       font-style: italic;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      color: var(--ink-secondary);
-      opacity: 0.82;
+      font-weight: 500;
+      letter-spacing: 0.16em;
+      color: rgba(230, 226, 218, 0.68);
     }
 
     /* Cuadrícula de canciones responsive */
@@ -520,30 +508,41 @@
       pointer-events: none;
     }
 
-    /* Enlace discreto de Play (100% compatible con ForoActivo) */
+    /* Botón Play con triángulo CSS puro (evita emoji azul en móviles y desalineación en ForoActivo) */
     .yt-play-link {
-      position: absolute;
-      bottom: 8px;
-      left: 8px;
-      z-index: 7;
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-      background: rgba(18, 16, 14, 0.82);
-      border: 1px solid rgba(235, 228, 216, 0.6);
-      color: #f3ece0 !important;
+      position: absolute !important;
+      bottom: 8px !important;
+      left: 8px !important;
+      z-index: 7 !important;
+      width: 30px !important;
+      height: 30px !important;
+      min-width: 30px !important;
+      min-height: 30px !important;
+      padding: 0 !important;
+      margin: 0 !important;
+      border-radius: 50% !important;
+      background: rgba(18, 16, 14, 0.84) !important;
+      background-color: rgba(18, 16, 14, 0.84) !important;
+      border: 1px solid rgba(235, 228, 216, 0.65) !important;
       text-decoration: none !important;
-      font-family: Georgia, serif !important;
-      font-size: 0.72rem !important;
-      line-height: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      display: flex !important;
+      align-items: center !important;
+      justify-content: center !important;
       cursor: pointer;
-      opacity: 0.88;
+      opacity: 0.9;
       transition: all 0.22s ease;
-      backdrop-filter: blur(2px);
-      padding-left: 2px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45) !important;
+    }
+
+    .yt-play-link::before {
+      content: "" !important;
+      display: block !important;
+      width: 0 !important;
+      height: 0 !important;
+      border-style: solid !important;
+      border-width: 5px 0 5px 9px !important;
+      border-color: transparent transparent transparent #f3ece0 !important;
+      margin-left: 2px !important;
     }
 
     .track-card:hover .yt-play-link {
@@ -552,13 +551,17 @@
     }
 
     .yt-play-link:hover {
-      background: #b9996b;
-      border-color: #f5efe6;
-      color: #161412 !important;
+      background: #b9996b !important;
+      background-color: #b9996b !important;
+      border-color: #f5efe6 !important;
+    }
+
+    .yt-play-link:hover::before {
+      border-color: transparent transparent transparent #161412 !important;
     }
 
     body.edit-mode .yt-play-link {
-      bottom: 34px;
+      bottom: 34px !important;
     }
 
     /* Número de pista discreto al pasar el cursor */
@@ -851,7 +854,7 @@
       color: #7f2920;
     }
 
-    /* Modales oscuros (Exportación y Spotify) */
+    /* Modal de Exportacion de codigo */
     .dark-modal {
       position: fixed;
       inset: 0;
@@ -883,11 +886,6 @@
       gap: 14px;
     }
 
-    .spotify-card {
-      max-width: 560px;
-      border-color: rgba(29, 185, 84, 0.45);
-    }
-
     .dark-header {
       display: flex;
       justify-content: space-between;
@@ -902,10 +900,6 @@
       text-transform: uppercase;
       color: #d6be96;
       font-weight: 700;
-    }
-
-    .spotify-header-title {
-      color: #4be380;
     }
 
     .dark-desc {
@@ -935,53 +929,6 @@
       justify-content: space-between;
       align-items: center;
       gap: 10px;
-    }
-
-    .sp-box {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      padding: 12px;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .sp-uri-row {
-      display: flex;
-      gap: 6px;
-      align-items: center;
-    }
-
-    .sp-uri-input {
-      flex: 1;
-      background: #110f0e;
-      border: 1px solid rgba(220, 217, 210, 0.2);
-      color: #b8b0a2;
-      padding: 6px 8px;
-      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
-      font-size: 0.74rem !important;
-    }
-
-    .sp-status {
-      padding: 10px 12px;
-      background: rgba(29, 185, 84, 0.1);
-      border: 1px solid rgba(29, 185, 84, 0.35);
-      color: #b7f5cc;
-      font-size: 0.88rem !important;
-      line-height: 1.45;
-      display: none;
-    }
-
-    .sp-status.error {
-      background: rgba(185, 65, 54, 0.15);
-      border-color: rgba(220, 100, 90, 0.45);
-      color: #f5b8b2;
-    }
-
-    .sp-status a {
-      color: #4be380;
-      font-weight: 700;
-      text-decoration: underline;
     }
 
     /* Toast de notificación con soporte para deshacer */
@@ -1071,7 +1018,8 @@
       .card-controls,
       .add-card,
       .quick-remove,
-      .yt-play-link {
+      .yt-play-link,
+      .poster-footer {
         display: none !important;
       }
       .setlist-poster {
@@ -1093,8 +1041,7 @@
     <div class="toolbar-actions">
       <button type="button" class="btn" id="btnToggleCustomizer">Personalizar</button>
       <button type="button" class="btn" id="btnEditMode">Editar en Vivo</button>
-      <button type="button" class="btn" id="btnAddTrack">+ Añadir</button>
-      <button type="button" class="btn btn-spotify" id="btnOpenSpotify">Crear en Spotify</button>
+      <button type="button" class="btn" id="btnAddTrack">+ Añadir Canción</button>
       <button type="button" class="btn btn-accent" id="btnOpenExport">Exportar Código</button>
       <button type="button" class="btn" id="btnReset">Restaurar</button>
     </div>
@@ -1207,11 +1154,12 @@
     <section class="poster-frame" id="posterFrame" aria-label="Lista de canciones">
       <div class="setlist-grid" id="setlistGrid"></div>
     </section>
-
-    <footer class="poster-footer">
-      based on playlist template - by cavalierfou
-    </footer>
   </main>
+
+  <!-- Footer por fuera de la box de la música -->
+  <footer class="poster-footer">
+    based on playlist template - by cavalierfou
+  </footer>
 
   <!-- Modal de Ficha y Edición de Canción -->
   <div class="modal-backdrop" id="detailModal" role="dialog" aria-modal="true">
@@ -1255,50 +1203,6 @@
     </div>
   </div>
 
-  <!-- Modal Generador de Playlist en Spotify (Client ID oculto) -->
-  <div class="dark-modal" id="spotifyModal" role="dialog" aria-modal="true">
-    <div class="dark-card spotify-card">
-      <div class="dark-header">
-        <p class="dark-header-title spotify-header-title">Generar Playlist en Spotify</p>
-        <button type="button" class="btn" id="closeSpotifyModal">Cerrar ✕</button>
-      </div>
-
-      <p class="dark-desc">
-        Conecta tu cuenta de Spotify para buscar automáticamente todas las canciones de tu set list y crear la playlist en tu biblioteca.
-      </p>
-
-      <div class="sp-box">
-        <label class="field">
-          <span>Nombre de la Playlist</span>
-          <input type="text" class="input-field" id="spotifyPlaylistName" value="SET LIST — Music of the Night" />
-        </label>
-
-        <label class="field">
-          <span>Visibilidad</span>
-          <select class="select-field" id="spotifyVisibility">
-            <option value="true" selected>Pública</option>
-            <option value="false">Privada</option>
-          </select>
-        </label>
-
-        <div class="field">
-          <span>Redirect URI (añádela en Settings → Redirect URIs de tu app en Spotify)</span>
-          <div class="sp-uri-row">
-            <input type="text" class="sp-uri-input" id="spotifyRedirectUri" readonly />
-            <button type="button" class="btn" id="btnCopyRedirectUri">Copiar</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="sp-status" id="spotifyStatusBox"></div>
-
-      <div class="dark-footer">
-        <span style="font-size:0.78rem !important; color:#9e9689;">Conexión segura OAuth PKCE</span>
-        <button type="button" class="btn btn-spotify" id="btnStartSpotifyAuth">Conectar y Crear Playlist</button>
-      </div>
-    </div>
-  </div>
-
   <!-- Modal de Exportacion de codigo -->
   <div class="dark-modal" id="exportModal" role="dialog" aria-modal="true">
     <div class="dark-card">
@@ -1308,7 +1212,6 @@
       </div>
 
       <p class="dark-desc">
-        Código minificado en una sola línea (<code>&lt;style&gt;</code> con <code>!important</code> + HTML puro sin <code>&lt;script&gt;</code> ni <code>&lt;iframe&gt;</code>). Cada botón <strong>▶</strong> abre directamente su enlace de YouTube en una pestaña nueva.
       </p>
 
       <textarea class="code-area" id="exportCodeArea" readonly spellcheck="false"></textarea>
@@ -1327,8 +1230,6 @@
   </div>
 
   <script>
-    const getSpCid = () => atob(["MjBhNmY0MDY1", "YTJkNDM3M2Fj", "NjQ4NzY3NWQ3", "ZWI5YmU="].join(""));
-
     const defaultTracks = [
       {
         song: "ANGELS ON A SATELLITE",
@@ -1444,7 +1345,6 @@
     const customizerPanel = document.getElementById("customizerPanel");
     const detailModal = document.getElementById("detailModal");
     const exportModal = document.getElementById("exportModal");
-    const spotifyModal = document.getElementById("spotifyModal");
     const toast = document.getElementById("toast");
     const toastText = document.getElementById("toastText");
     const toastUndoBtn = document.getElementById("toastUndoBtn");
@@ -1549,7 +1449,7 @@
         const ytUrl = normalizeYouTubeUrl(item.youtube);
 
         const playLinkHtml = ytUrl
-          ? `<a class="yt-play-link" href="${escapeHtml(ytUrl)}" target="_blank" rel="noopener noreferrer" data-action="yt-link" title="Escuchar en YouTube" aria-label="Escuchar ${escapeHtml(item.song)} en YouTube">▶</a>`
+          ? `<a class="yt-play-link" href="${escapeHtml(ytUrl)}" target="_blank" rel="noopener noreferrer" data-action="yt-link" title="Escuchar en YouTube" aria-label="Escuchar ${escapeHtml(item.song)} en YouTube"></a>`
           : "";
 
         card.innerHTML = `
@@ -1841,262 +1741,7 @@
       applyConfig();
     });
 
-    // =========================================================================
-    // INTEGRACIÓN SPOTIFY OAUTH 2.0 PKCE (Client ID oculto)
-    // =========================================================================
-    const spRedirectUriInput = document.getElementById("spotifyRedirectUri");
-    const spPlaylistNameInput = document.getElementById("spotifyPlaylistName");
-    const spVisibilitySelect = document.getElementById("spotifyVisibility");
-    const spStatusBox = document.getElementById("spotifyStatusBox");
-
-    function getCleanRedirectUri() {
-      return window.location.origin + window.location.pathname;
-    }
-
-    function setSpotifyStatus(htmlMsg, isError = false) {
-      spStatusBox.innerHTML = htmlMsg;
-      spStatusBox.classList.toggle("error", isError);
-      spStatusBox.style.display = "block";
-    }
-
-    function generateRandomString(length) {
-      const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-      const values = crypto.getRandomValues(new Uint8Array(length));
-      return values.reduce((acc, x) => acc + possible[x % possible.length], "");
-    }
-
-    async function sha256(plain) {
-      const encoder = new TextEncoder();
-      const data = encoder.encode(plain);
-      return window.crypto.subtle.digest("SHA-256", data);
-    }
-
-    function base64encode(input) {
-      return btoa(String.fromCharCode(...new Uint8Array(input)))
-        .replace(/=/g, "")
-        .replace(/\+/g, "-")
-        .replace(/\//g, "_");
-    }
-
-    document.getElementById("btnOpenSpotify").addEventListener("click", () => {
-      spRedirectUriInput.value = getCleanRedirectUri();
-      spPlaylistNameInput.value = `${config.centerTitle} — ${config.leftTitle}`;
-      spStatusBox.style.display = "none";
-      spotifyModal.classList.add("open");
-    });
-
-    document.getElementById("closeSpotifyModal").addEventListener("click", () => {
-      spotifyModal.classList.remove("open");
-    });
-
-    spotifyModal.addEventListener("click", (e) => {
-      if (e.target === spotifyModal) spotifyModal.classList.remove("open");
-    });
-
-    document.getElementById("btnCopyRedirectUri").addEventListener("click", async () => {
-      spRedirectUriInput.select();
-      try {
-        await navigator.clipboard.writeText(spRedirectUriInput.value);
-        showToast("Redirect URI copiada");
-      } catch {
-        document.execCommand("copy");
-        showToast("Redirect URI copiada");
-      }
-    });
-
-    document.getElementById("btnStartSpotifyAuth").addEventListener("click", async () => {
-      if (window.location.protocol === "file:") {
-        setSpotifyStatus(
-          "Spotify requiere una URL web (<code>https://...</code> o <code>http://localhost</code>). Sube esta página a GitHub Pages o ábrela con Live Server.",
-          true
-        );
-        return;
-      }
-
-      if (tracks.length === 0) {
-        setSpotifyStatus("No hay canciones en tu lista para exportar a Spotify.", true);
-        return;
-      }
-
-      sessionStorage.setItem(
-        "wom_spotify_pending",
-        JSON.stringify({
-          playlistName: spPlaylistNameInput.value.trim() || `${config.centerTitle} — ${config.leftTitle}`,
-          isPublic: spVisibilitySelect.value === "true",
-          tracks,
-          config
-        })
-      );
-
-      const codeVerifier = generateRandomString(64);
-      const hashed = await sha256(codeVerifier);
-      const codeChallenge = base64encode(hashed);
-      sessionStorage.setItem("wom_spotify_verifier", codeVerifier);
-
-      const scope = "playlist-modify-public playlist-modify-private";
-      const authUrl = new URL("https://accounts.spotify.com/authorize");
-      authUrl.search = new URLSearchParams({
-        response_type: "code",
-        client_id: getSpCid(),
-        scope,
-        code_challenge_method: "S256",
-        code_challenge: codeChallenge,
-        redirect_uri: getCleanRedirectUri()
-      }).toString();
-
-      window.location.href = authUrl.toString();
-    });
-
-    async function handleSpotifyCallback() {
-      const urlParams = new URLSearchParams(window.location.search);
-      const code = urlParams.get("code");
-      const error = urlParams.get("error");
-      const pendingRaw = sessionStorage.getItem("wom_spotify_pending");
-      const codeVerifier = sessionStorage.getItem("wom_spotify_verifier");
-
-      if (!code && !error) return;
-
-      window.history.replaceState({}, document.title, getCleanRedirectUri());
-
-      if (!pendingRaw) return;
-      const pending = JSON.parse(pendingRaw);
-
-      if (pending.tracks) tracks = pending.tracks;
-      if (pending.config) {
-        config = pending.config;
-        applyConfig();
-        renderSetlist();
-      }
-
-      spRedirectUriInput.value = getCleanRedirectUri();
-      spPlaylistNameInput.value = pending.playlistName || "SET LIST";
-      spotifyModal.classList.add("open");
-
-      if (error) {
-        setSpotifyStatus(`Autorización cancelada o denegada por Spotify (${escapeHtml(error)}).`, true);
-        sessionStorage.removeItem("wom_spotify_pending");
-        sessionStorage.removeItem("wom_spotify_verifier");
-        return;
-      }
-
-      try {
-        setSpotifyStatus("Conectando con Spotify y obteniendo token...");
-
-        const tokenRes = await fetch("https://accounts.spotify.com/api/token", {
-          method: "POST",
-          headers: { "Content-Type": "application/x-www-form-urlencoded" },
-          body: new URLSearchParams({
-            client_id: getSpCid(),
-            grant_type: "authorization_code",
-            code,
-            redirect_uri: getCleanRedirectUri(),
-            code_verifier: codeVerifier
-          })
-        });
-
-        const tokenData = await tokenRes.json();
-        if (!tokenRes.ok || !tokenData.access_token) {
-          throw new Error(tokenData.error_description || "No se pudo obtener el token de acceso.");
-        }
-
-        const token = tokenData.access_token;
-        const headers = {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json"
-        };
-
-        const meRes = await fetch("https://api.spotify.com/v1/me", { headers });
-        const meData = await meRes.json();
-        if (!meRes.ok || !meData.id) {
-          throw new Error("No se pudo obtener el perfil de usuario de Spotify.");
-        }
-
-        setSpotifyStatus(`Buscando ${pending.tracks.length} canciones en el catálogo de Spotify...`);
-
-        const uris = [];
-        const notFound = [];
-
-        for (const item of pending.tracks) {
-          const query = encodeURIComponent(`track:${item.song} artist:${item.artist}`);
-          const searchRes = await fetch(
-            `https://api.spotify.com/v1/search?q=${query}&type=track&limit=1`,
-            { headers }
-          );
-          const searchData = await searchRes.json();
-          const foundTrack = searchData?.tracks?.items?.[0];
-
-          if (foundTrack?.uri) {
-            uris.push(foundTrack.uri);
-          } else {
-            const fallbackQ = encodeURIComponent(`${item.song} ${item.artist}`);
-            const fbRes = await fetch(
-              `https://api.spotify.com/v1/search?q=${fallbackQ}&type=track&limit=1`,
-              { headers }
-            );
-            const fbData = await fbRes.json();
-            const fbTrack = fbData?.tracks?.items?.[0];
-            if (fbTrack?.uri) {
-              uris.push(fbTrack.uri);
-            } else {
-              notFound.push(`${item.song} — ${item.artist}`);
-            }
-          }
-        }
-
-        if (uris.length === 0) {
-          throw new Error("No se encontró ninguna de las canciones en Spotify.");
-        }
-
-        setSpotifyStatus("Creando playlist en tu biblioteca...");
-
-        const createRes = await fetch(
-          `https://api.spotify.com/v1/users/${encodeURIComponent(meData.id)}/playlists`,
-          {
-            method: "POST",
-            headers,
-            body: JSON.stringify({
-              name: pending.playlistName,
-              description: `${config.leftTitle} · ${config.rightTitle}`,
-              public: pending.isPublic
-            })
-          }
-        );
-        const playlistData = await createRes.json();
-        if (!createRes.ok || !playlistData.id) {
-          throw new Error("Error al crear la playlist en tu cuenta.");
-        }
-
-        for (let i = 0; i < uris.length; i += 100) {
-          const chunk = uris.slice(i, i + 100);
-          await fetch(
-            `https://api.spotify.com/v1/playlists/${encodeURIComponent(playlistData.id)}/tracks`,
-            {
-              method: "POST",
-              headers,
-              body: JSON.stringify({ uris: chunk })
-            }
-          );
-        }
-
-        const playlistUrl = playlistData.external_urls?.spotify || `https://open.spotify.com/playlist/${playlistData.id}`;
-        const missingNote =
-          notFound.length > 0
-            ? `<br><small style="opacity:0.85">No encontradas (${notFound.length}): ${escapeHtml(notFound.join(", "))}</small>`
-            : "";
-
-        setSpotifyStatus(
-          `¡Playlist creada con <strong>${uris.length}</strong> canciones!<br><a href="${escapeHtml(playlistUrl)}" target="_blank" rel="noopener noreferrer">Abrir "${escapeHtml(pending.playlistName)}" en Spotify ↗</a>${missingNote}`
-        );
-        showToast("Playlist creada en Spotify");
-      } catch (err) {
-        setSpotifyStatus(`Error: ${escapeHtml(err.message || "Fallo inesperado")}`, true);
-      } finally {
-        sessionStorage.removeItem("wom_spotify_pending");
-        sessionStorage.removeItem("wom_spotify_verifier");
-      }
-    }
-
-    // Generacion de codigo exportable en 1 linea (ForoActivo: sin scripts ni iframes)
+    // Generacion de codigo exportable en 1 linea (ForoActivo: sin scripts ni emojis)
     function generateSingleLineExport() {
       const borderRule =
         config.frame === "double"
@@ -2105,13 +1750,13 @@
           ? "1px solid transparent"
           : `1px solid ${hexToRgba(config.inkColor, 0.72)}`;
 
-      const cssMin = `@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600;1,700&display=swap');.setlist-poster,.setlist-poster *{box-sizing:border-box;margin:0;padding:0;font-family:'Cormorant Garamond',Georgia,serif !important}.setlist-poster{--poster-paper:${config.paperColor};--poster-ink:${config.inkColor};--poster-ink-soft:${hexToRgba(config.inkColor, 0.85)};--poster-cols:${config.cols};position:relative;width:100%;max-width:820px;margin:0 auto;padding:clamp(16px,3.6vw,30px) clamp(14px,4vw,34px) clamp(20px,4.2vw,36px);background-color:var(--poster-paper);color:var(--poster-ink);font-family:'Cormorant Garamond',Georgia,serif !important;box-shadow:0 22px 50px rgba(0,0,0,.35),inset 0 0 60px rgba(80,72,60,.14);background-image:radial-gradient(circle at 18% 22%,rgba(92,82,70,.08) 0%,transparent 45%),radial-gradient(circle at 82% 76%,rgba(65,58,50,.09) 0%,transparent 50%)}.poster-header{display:grid;grid-template-columns:1fr auto 1fr;align-items:baseline;gap:8px;padding:0 4px clamp(10px,1.8vw,14px);text-transform:uppercase}.header-left{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.56rem,1.3vw,.72rem) !important;font-weight:700;letter-spacing:.14em;text-align:left}.header-center{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.88rem,2.2vw,1.15rem) !important;font-weight:700;letter-spacing:.18em;text-align:center;line-height:1}.header-right{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.56rem,1.3vw,.72rem) !important;font-weight:700;letter-spacing:.14em;text-align:right}.poster-frame{border:${borderRule};padding:clamp(12px,2.6vw,22px) clamp(12px,2.6vw,22px) clamp(10px,2vw,16px)}.setlist-grid{display:grid;grid-template-columns:repeat(var(--poster-cols),minmax(0,1fr));column-gap:clamp(12px,2.4vw,20px);row-gap:clamp(14px,2.6vw,22px)}.track-card{display:flex;flex-direction:column;align-items:center;min-width:0}.track-artwork{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:#231e1b;box-shadow:inset 0 0 0 1px rgba(25,22,19,.25)}.track-artwork img{width:100%;height:100%;object-fit:cover;display:block;filter:${config.filter}}.yt-play-link{position:absolute;bottom:8px;left:8px;z-index:5;width:30px;height:30px;border-radius:50%;background:rgba(18,16,14,.82);border:1px solid rgba(235,228,216,.6);color:#f3ece0 !important;text-decoration:none !important;font-family:Georgia,serif !important;font-size:.72rem !important;line-height:1;display:flex;align-items:center;justify-content:center;padding-left:2px;transition:all .2s ease}.yt-play-link:hover{background:#b9996b;color:#161412 !important;border-color:#f5efe6;transform:scale(1.06)}.track-label{width:100%;text-align:center;padding-top:8px}.track-song{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.68rem,1.45vw,.82rem) !important;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.25;word-break:break-word}.track-artist{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.74rem,1.55vw,.88rem) !important;font-style:italic;font-weight:600;letter-spacing:.03em;line-height:1.25;color:var(--poster-ink-soft);margin-top:1px}@media(max-width:720px){.setlist-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:440px){.poster-header{grid-template-columns:1fr;text-align:center;gap:4px}.header-left,.header-center,.header-right{text-align:center}.setlist-grid{grid-template-columns:1fr}}`;
+      const cssMin = `@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600;1,700&display=swap');.setlist-poster,.setlist-poster *{box-sizing:border-box;margin:0;padding:0;font-family:'Cormorant Garamond',Georgia,serif !important}.setlist-poster{--poster-paper:${config.paperColor};--poster-ink:${config.inkColor};--poster-ink-soft:${hexToRgba(config.inkColor, 0.85)};--poster-cols:${config.cols};position:relative;width:100%;max-width:820px;margin:0 auto;padding:clamp(16px,3.6vw,30px) clamp(14px,4vw,34px) clamp(20px,4.2vw,36px);background-color:var(--poster-paper);color:var(--poster-ink);font-family:'Cormorant Garamond',Georgia,serif !important;box-shadow:0 22px 50px rgba(0,0,0,.35),inset 0 0 60px rgba(80,72,60,.14);background-image:radial-gradient(circle at 18% 22%,rgba(92,82,70,.08) 0%,transparent 45%),radial-gradient(circle at 82% 76%,rgba(65,58,50,.09) 0%,transparent 50%)}.poster-header{display:grid;grid-template-columns:1fr auto 1fr;align-items:baseline;gap:8px;padding:0 4px clamp(10px,1.8vw,14px);text-transform:uppercase}.header-left{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.56rem,1.3vw,.72rem) !important;font-weight:700;letter-spacing:.14em;text-align:left}.header-center{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.88rem,2.2vw,1.15rem) !important;font-weight:700;letter-spacing:.18em;text-align:center;line-height:1}.header-right{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.56rem,1.3vw,.72rem) !important;font-weight:700;letter-spacing:.14em;text-align:right}.poster-frame{border:${borderRule};padding:clamp(12px,2.6vw,22px) clamp(12px,2.6vw,22px) clamp(10px,2vw,16px)}.setlist-grid{display:grid;grid-template-columns:repeat(var(--poster-cols),minmax(0,1fr));column-gap:clamp(12px,2.4vw,20px);row-gap:clamp(14px,2.6vw,22px)}.track-card{display:flex;flex-direction:column;align-items:center;min-width:0}.track-artwork{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:#231e1b;box-shadow:inset 0 0 0 1px rgba(25,22,19,.25)}.track-artwork img{width:100%;height:100%;object-fit:cover;display:block;filter:${config.filter}}.yt-play-link{position:absolute !important;bottom:8px !important;left:8px !important;z-index:5 !important;width:30px !important;height:30px !important;min-width:30px !important;min-height:30px !important;padding:0 !important;margin:0 !important;border-radius:50% !important;background:rgba(18,16,14,.84) !important;background-color:rgba(18,16,14,.84) !important;border:1px solid rgba(235,228,216,.65) !important;text-decoration:none !important;display:flex !important;align-items:center !important;justify-content:center !important;transition:all .2s ease}.yt-play-link::before{content:"" !important;display:block !important;width:0 !important;height:0 !important;border-style:solid !important;border-width:5px 0 5px 9px !important;border-color:transparent transparent transparent #f3ece0 !important;margin-left:2px !important}.yt-play-link:hover{background:#b9996b !important;background-color:#b9996b !important;border-color:#f5efe6 !important;transform:scale(1.06)}.yt-play-link:hover::before{border-color:transparent transparent transparent #161412 !important}.track-label{width:100%;text-align:center;padding-top:8px}.track-song{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.68rem,1.45vw,.82rem) !important;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.25;word-break:break-word}.track-artist{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.74rem,1.55vw,.88rem) !important;font-style:italic;font-weight:600;letter-spacing:.03em;line-height:1.25;color:var(--poster-ink-soft);margin-top:1px}@media(max-width:720px){.setlist-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:440px){.poster-header{grid-template-columns:1fr;text-align:center;gap:4px}.header-left,.header-center,.header-right{text-align:center}.setlist-grid{grid-template-columns:1fr}}`;
 
       const cardsMin = tracks
         .map((t) => {
           const ytUrl = normalizeYouTubeUrl(t.youtube);
           const linkBtn = ytUrl
-            ? `<a class="yt-play-link" href="${escapeHtml(ytUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Escuchar ${escapeHtml(t.song)}">▶</a>`
+            ? `<a class="yt-play-link" href="${escapeHtml(ytUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Escuchar ${escapeHtml(t.song)}"></a>`
             : "";
           return `<article class="track-card"><figure class="track-artwork"><img src="${escapeHtml(t.image)}" alt="${escapeHtml(t.song)} — ${escapeHtml(t.artist)}">${linkBtn}</figure><div class="track-label"><p class="track-song">${escapeHtml(t.song)}</p><p class="track-artist">${escapeHtml(t.artist)}</p></div></article>`;
         })
@@ -2150,7 +1795,6 @@
     // Inicializar
     applyConfig();
     renderSetlist();
-    handleSpotifyCallback();
   </script>
 </body>
 </html>
