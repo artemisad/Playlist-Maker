@@ -87,7 +87,7 @@
       display: flex;
       flex-wrap: wrap;
       align-items: center;
-      gap: 7px;
+      gap: 6px;
     }
 
     .btn {
@@ -95,10 +95,10 @@
       border: 1px solid rgba(220, 217, 210, 0.28);
       color: #e8e4dc;
       font-family: 'Cormorant Garamond', serif !important;
-      font-size: 0.8rem !important;
+      font-size: 0.78rem !important;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      padding: 5px 11px;
+      padding: 5px 10px;
       cursor: pointer;
       transition: all 0.22s ease;
       display: inline-flex;
@@ -127,6 +127,17 @@
     .btn-accent:hover {
       background: #cbb086;
       border-color: #cbb086;
+    }
+
+    .btn-spotify {
+      background: #1db954;
+      color: #0e1410;
+      border-color: #1db954;
+    }
+
+    .btn-spotify:hover {
+      background: #25d363;
+      border-color: #25d363;
     }
 
     /* Panel de Personalización */
@@ -509,6 +520,47 @@
       pointer-events: none;
     }
 
+    /* Enlace discreto de Play (100% compatible con ForoActivo) */
+    .yt-play-link {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      z-index: 7;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: rgba(18, 16, 14, 0.82);
+      border: 1px solid rgba(235, 228, 216, 0.6);
+      color: #f3ece0 !important;
+      text-decoration: none !important;
+      font-family: Georgia, serif !important;
+      font-size: 0.72rem !important;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      opacity: 0.88;
+      transition: all 0.22s ease;
+      backdrop-filter: blur(2px);
+      padding-left: 2px;
+    }
+
+    .track-card:hover .yt-play-link {
+      opacity: 1;
+      transform: scale(1.08);
+    }
+
+    .yt-play-link:hover {
+      background: #b9996b;
+      border-color: #f5efe6;
+      color: #161412 !important;
+    }
+
+    body.edit-mode .yt-play-link {
+      bottom: 34px;
+    }
+
     /* Número de pista discreto al pasar el cursor */
     .track-index {
       position: absolute;
@@ -799,8 +851,8 @@
       color: #7f2920;
     }
 
-    /* Modal de Exportacion de codigo */
-    .export-modal {
+    /* Modales oscuros (Exportación y Spotify) */
+    .dark-modal {
       position: fixed;
       inset: 0;
       background: rgba(10, 9, 8, 0.88);
@@ -812,16 +864,18 @@
       z-index: 120;
     }
 
-    .export-modal.open {
+    .dark-modal.open {
       display: flex;
     }
 
-    .export-card {
+    .dark-card {
       background: #1c1917;
       color: #eae6de;
       border: 1px solid rgba(185, 153, 107, 0.45);
       max-width: 780px;
       width: 100%;
+      max-height: 92vh;
+      overflow-y: auto;
       padding: 22px;
       box-shadow: 0 28px 70px rgba(0, 0, 0, 0.8);
       display: flex;
@@ -829,7 +883,12 @@
       gap: 14px;
     }
 
-    .export-header {
+    .spotify-card {
+      max-width: 560px;
+      border-color: rgba(29, 185, 84, 0.45);
+    }
+
+    .dark-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -837,7 +896,7 @@
       padding-bottom: 10px;
     }
 
-    .export-header-title {
+    .dark-header-title {
       font-size: 0.95rem !important;
       letter-spacing: 0.16em;
       text-transform: uppercase;
@@ -845,10 +904,14 @@
       font-weight: 700;
     }
 
-    .export-desc {
-      font-size: 0.86rem !important;
+    .spotify-header-title {
+      color: #4be380;
+    }
+
+    .dark-desc {
+      font-size: 0.88rem !important;
       color: #c8c1b4;
-      line-height: 1.4;
+      line-height: 1.45;
     }
 
     .code-area {
@@ -866,12 +929,59 @@
       outline: none;
     }
 
-    .export-footer {
+    .dark-footer {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       gap: 10px;
+    }
+
+    .sp-box {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sp-uri-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .sp-uri-input {
+      flex: 1;
+      background: #110f0e;
+      border: 1px solid rgba(220, 217, 210, 0.2);
+      color: #b8b0a2;
+      padding: 6px 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+      font-size: 0.74rem !important;
+    }
+
+    .sp-status {
+      padding: 10px 12px;
+      background: rgba(29, 185, 84, 0.1);
+      border: 1px solid rgba(29, 185, 84, 0.35);
+      color: #b7f5cc;
+      font-size: 0.88rem !important;
+      line-height: 1.45;
+      display: none;
+    }
+
+    .sp-status.error {
+      background: rgba(185, 65, 54, 0.15);
+      border-color: rgba(220, 100, 90, 0.45);
+      color: #f5b8b2;
+    }
+
+    .sp-status a {
+      color: #4be380;
+      font-weight: 700;
+      text-decoration: underline;
     }
 
     /* Toast de notificación con soporte para deshacer */
@@ -956,11 +1066,12 @@
       .studio-toolbar,
       .customizer-panel,
       .modal-backdrop,
-      .export-modal,
+      .dark-modal,
       .toast,
       .card-controls,
       .add-card,
-      .quick-remove {
+      .quick-remove,
+      .yt-play-link {
         display: none !important;
       }
       .setlist-poster {
@@ -982,7 +1093,8 @@
     <div class="toolbar-actions">
       <button type="button" class="btn" id="btnToggleCustomizer">Personalizar</button>
       <button type="button" class="btn" id="btnEditMode">Editar en Vivo</button>
-      <button type="button" class="btn" id="btnAddTrack">+ Añadir Canción</button>
+      <button type="button" class="btn" id="btnAddTrack">+ Añadir</button>
+      <button type="button" class="btn btn-spotify" id="btnOpenSpotify">Crear en Spotify</button>
       <button type="button" class="btn btn-accent" id="btnOpenExport">Exportar Código</button>
       <button type="button" class="btn" id="btnReset">Restaurar</button>
     </div>
@@ -1123,6 +1235,10 @@
           <input type="text" id="editArtistInput" />
         </label>
         <label>
+          Link de YouTube (URL completa o ID)
+          <input type="text" id="editYoutubeInput" placeholder="https://www.youtube.com/watch?v=..." />
+        </label>
+        <label>
           URL de la Obra / Imagen
           <input type="text" id="editUrlInput" placeholder="https://..." />
         </label>
@@ -1139,22 +1255,66 @@
     </div>
   </div>
 
+  <!-- Modal Generador de Playlist en Spotify (Client ID oculto) -->
+  <div class="dark-modal" id="spotifyModal" role="dialog" aria-modal="true">
+    <div class="dark-card spotify-card">
+      <div class="dark-header">
+        <p class="dark-header-title spotify-header-title">Generar Playlist en Spotify</p>
+        <button type="button" class="btn" id="closeSpotifyModal">Cerrar ✕</button>
+      </div>
+
+      <p class="dark-desc">
+        Conecta tu cuenta de Spotify para buscar automáticamente todas las canciones de tu set list y crear la playlist en tu biblioteca.
+      </p>
+
+      <div class="sp-box">
+        <label class="field">
+          <span>Nombre de la Playlist</span>
+          <input type="text" class="input-field" id="spotifyPlaylistName" value="SET LIST — Music of the Night" />
+        </label>
+
+        <label class="field">
+          <span>Visibilidad</span>
+          <select class="select-field" id="spotifyVisibility">
+            <option value="true" selected>Pública</option>
+            <option value="false">Privada</option>
+          </select>
+        </label>
+
+        <div class="field">
+          <span>Redirect URI (añádela en Settings → Redirect URIs de tu app en Spotify)</span>
+          <div class="sp-uri-row">
+            <input type="text" class="sp-uri-input" id="spotifyRedirectUri" readonly />
+            <button type="button" class="btn" id="btnCopyRedirectUri">Copiar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="sp-status" id="spotifyStatusBox"></div>
+
+      <div class="dark-footer">
+        <span style="font-size:0.78rem !important; color:#9e9689;">Conexión segura OAuth PKCE</span>
+        <button type="button" class="btn btn-spotify" id="btnStartSpotifyAuth">Conectar y Crear Playlist</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal de Exportacion de codigo -->
-  <div class="export-modal" id="exportModal" role="dialog" aria-modal="true">
-    <div class="export-card">
-      <div class="export-header">
-        <p class="export-header-title">Exportar Playlist (Style + HTML en 1 línea)</p>
+  <div class="dark-modal" id="exportModal" role="dialog" aria-modal="true">
+    <div class="dark-card">
+      <div class="dark-header">
+        <p class="dark-header-title">Exportar Playlist (ForoActivo · 1 línea sin scripts)</p>
         <button type="button" class="btn" id="closeExportModal">Cerrar ✕</button>
       </div>
 
-      <p class="export-desc">
-        Código minificado en una sola línea únicamente con el bloque <code>&lt;style&gt;</code> (<code>font-size</code> y <code>font-family</code> con <code>!important</code>) y el HTML limpio de la playlist listo para pegar.
+      <p class="dark-desc">
+        Código minificado en una sola línea (<code>&lt;style&gt;</code> con <code>!important</code> + HTML puro sin <code>&lt;script&gt;</code> ni <code>&lt;iframe&gt;</code>). Cada botón <strong>▶</strong> abre directamente su enlace de YouTube en una pestaña nueva.
       </p>
 
       <textarea class="code-area" id="exportCodeArea" readonly spellcheck="false"></textarea>
 
-      <div class="export-footer">
-        <span style="font-size:0.8rem !important; color:#b8b0a2;">1 línea · Solo playlist y su respectivo estilo</span>
+      <div class="dark-footer">
+        <span style="font-size:0.8rem !important; color:#b8b0a2;">100% compatible con ForoActivo · 1 sola línea</span>
         <button type="button" class="btn btn-accent" id="btnCopyCode">Copiar Código</button>
       </div>
     </div>
@@ -1167,76 +1327,90 @@
   </div>
 
   <script>
+    const getSpCid = () => atob(["MjBhNmY0MDY1", "YTJkNDM3M2Fj", "NjQ4NzY3NWQ3", "ZWI5YmU="].join(""));
+
     const defaultTracks = [
       {
         song: "ANGELS ON A SATELLITE",
         artist: "Magdalena Bay",
+        youtube: "https://www.youtube.com/watch?v=DfcWOPpmw14",
         note: "Querubines barrocos entre nubes rosadas; synth-pop celestial y melancólico sobre distancias orbitales.",
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Fran%C3%A7ois_Boucher_-_Putti_with_Birds_-_Google_Art_Project.jpg/640px-Fran%C3%A7ois_Boucher_-_Putti_with_Birds_-_Google_Art_Project.jpg"
       },
       {
         song: "SPELLWORK",
         artist: "Austra",
+        youtube: "https://www.youtube.com/watch?v=8LJtMrhb558",
         note: "Pliegues de seda floreada y bordados antiguos; electrónica oscura con aura ritual y operística.",
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5b/Fran%C3%A7ois_Boucher_-_Madame_de_Pompadour_-_1756.jpg/640px-Fran%C3%A7ois_Boucher_-_Madame_de_Pompadour_-_1756.jpg"
       },
       {
         song: "BORN TO DIE",
         artist: "Lana Del Rey",
+        youtube: "https://www.youtube.com/watch?v=Bag1gUxuU0g",
         note: "Naturaleza muerta floral sobre penumbra tenebrista; romance trágico y nostalgia cinematográfica.",
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3a/Jan_Davidsz._de_Heem_-_Flowers_in_a_Glass_Vase_-_WGA11257.jpg/640px-Jan_Davidsz._de_Heem_-_Flowers_in_a_Glass_Vase_-_WGA11257.jpg"
       },
       {
         song: "PERFECT PLACES",
         artist: "Lorde",
+        youtube: "https://www.youtube.com/watch?v=J0DjcsK_-HY",
         note: "Paisaje brumoso de arboledas románticas; euforia nocturna y desencanto juvenil.",
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1b/Jean-Baptiste-Camille_Corot_-_Souvenir_de_Mortefontaine_-_Louvre.jpg/640px-Jean-Baptiste-Camille_Corot_-_Souvenir_de_Mortefontaine_-_Louvre.jpg"
       },
       {
         song: "THE FRUITS",
         artist: "Paris Paloma",
+        youtube: "https://www.youtube.com/watch?v=f_U34K9S2W4",
         note: "Bodegón de uvas y granada abierta al estilo Caravaggio; simbolismo mitológico y rabia poética.",
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/8/8c/Caravaggio_-_Basket_of_Fruit_-_detail.jpg/640px-Caravaggio_-_Basket_of_Fruit_-_detail.jpg"
       },
       {
         song: "HOUSE OF METAL",
         artist: "Chelsea Wolfe",
+        youtube: "https://www.youtube.com/watch?v=s70c22V9t3A",
         note: "Manos entrelazadas sobre brocado histórico; folk gótico denso y devoción sombría.",
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/d/d3/Elisabeth_Vig%C3%A9e-Lebrun_-_Marie_Antoinette_-_1783.jpg/640px-Elisabeth_Vig%C3%A9e-Lebrun_-_Marie_Antoinette_-_1783.jpg"
       },
       {
         song: "SHADOW",
         artist: "Chromatics",
+        youtube: "https://www.youtube.com/watch?v=IGUboLZx3Zk",
         note: "Tulipanes y flores silvestres emergiendo de la oscuridad; dream-pop nocturno en blanco y sepia.",
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Ambrosius_Bosschaert_the_Elder_-_Flower_Still_Life_-_WGA02627.jpg/640px-Ambrosius_Bosschaert_the_Elder_-_Flower_Still_Life_-_WGA02627.jpg"
       },
       {
         song: "SEVEN WONDERS",
         artist: "Fleetwood Mac",
+        youtube: "https://www.youtube.com/watch?v=9b4F_ppjnKU",
         note: "Gracia renacentista de Botticelli; misticismo luminoso y armonías atemporales.",
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Botticelli-primavera-graces.jpg/640px-Botticelli-primavera-graces.jpg"
       },
       {
         song: "MELTING",
         artist: "Kali Uchis",
+        youtube: "https://www.youtube.com/watch?v=1g5w12G31wI",
         note: "Agujas góticas tras la espesura del bosque; soul aterciopelado que se deshace lentamente.",
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/c/c3/Caspar_David_Friedrich_-_Cross_in_the_Mountains_%28Tetschen_Altar%29_-_Google_Art_Project.jpg/640px-Caspar_David_Friedrich_-_Cross_in_the_Mountains_%28Tetschen_Altar%29_-_Google_Art_Project.jpg"
       },
       {
         song: "THE END OF LOVE",
         artist: "Florence + The Machine",
+        youtube: "https://www.youtube.com/watch?v=9y4G3P3Y1bQ",
         note: "Ángel descendiendo entre sombras dramáticas; catarsis coral y entrega espiritual.",
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/7/73/Caravaggio_-_Amor_Vincit_Omnia_-_Google_Art_Project.jpg/640px-Caravaggio_-_Amor_Vincit_Omnia_-_Google_Art_Project.jpg"
       },
       {
         song: "LEJOS DE TI",
         artist: "The Marías",
+        youtube: "https://www.youtube.com/watch?v=M0n-2G9uW8g",
         note: "Rosas antiguas en claroscuro cálido; intimidad hipnótica y añoranza en español.",
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e4/Rachel_Ruysch_-_Still-Life_with_Flowers_-_WGA20487.jpg/640px-Rachel_Ruysch_-_Still-Life_with_Flowers_-_WGA20487.jpg"
       },
       {
         song: "WUTHERING HEIGHTS",
         artist: "Kate Bush",
+        youtube: "https://www.youtube.com/watch?v=-1pMMIe4hb4",
         note: "Relicario sostenido junto al pecho en penumbra; dramatismo literario inspirado en Emily Brontë.",
         image: "https://upload.wikimedia.org/wikipedia/commons/thumb/9/9f/Georges_de_La_Tour_-_The_Penitent_Magdalen_-_Google_Art_Project.jpg/640px-Georges_de_La_Tour_-_The_Penitent_Magdalen_-_Google_Art_Project.jpg"
       }
@@ -1270,9 +1444,21 @@
     const customizerPanel = document.getElementById("customizerPanel");
     const detailModal = document.getElementById("detailModal");
     const exportModal = document.getElementById("exportModal");
+    const spotifyModal = document.getElementById("spotifyModal");
     const toast = document.getElementById("toast");
     const toastText = document.getElementById("toastText");
     const toastUndoBtn = document.getElementById("toastUndoBtn");
+
+    function normalizeYouTubeUrl(input) {
+      if (!input) return "";
+      const val = input.trim();
+      if (!val) return "";
+      if (/^[a-zA-Z0-9_-]{11}$/.test(val)) {
+        return `https://www.youtube.com/watch?v=${val}`;
+      }
+      if (/^https?:\/\//i.test(val)) return val;
+      return `https://${val}`;
+    }
 
     function showToast(msg, canUndo = false) {
       toastText.textContent = msg;
@@ -1360,6 +1546,11 @@
         card.setAttribute("data-track", String(idx + 1).padStart(2, "0"));
 
         const num = String(idx + 1).padStart(2, "0");
+        const ytUrl = normalizeYouTubeUrl(item.youtube);
+
+        const playLinkHtml = ytUrl
+          ? `<a class="yt-play-link" href="${escapeHtml(ytUrl)}" target="_blank" rel="noopener noreferrer" data-action="yt-link" title="Escuchar en YouTube" aria-label="Escuchar ${escapeHtml(item.song)} en YouTube">▶</a>`
+          : "";
 
         card.innerHTML = `
           <button type="button" class="quick-remove" data-action="quick-remove" title="Quitar canción" aria-label="Quitar ${escapeHtml(item.song)}">✕</button>
@@ -1367,12 +1558,13 @@
             <img src="${item.image}" alt="${escapeHtml(item.song)} — ${escapeHtml(item.artist)}" loading="lazy" />
             <div class="artwork-overlay" aria-hidden="true"></div>
             <span class="track-index">${num}</span>
+            ${playLinkHtml}
             <div class="card-controls">
               <div>
                 <button type="button" class="mini-btn" data-action="up" title="Mover antes">↑</button>
                 <button type="button" class="mini-btn" data-action="down" title="Mover después">↓</button>
               </div>
-              <button type="button" class="mini-btn" data-action="edit-modal">Ficha / Img</button>
+              <button type="button" class="mini-btn" data-action="edit-modal">Ficha / YT</button>
             </div>
           </figure>
           <div class="track-label">
@@ -1396,6 +1588,13 @@
             if (isEditMode) e.stopPropagation();
           });
         });
+
+        const ytLink = card.querySelector('[data-action="yt-link"]');
+        if (ytLink) {
+          ytLink.addEventListener("click", (e) => {
+            e.stopPropagation();
+          });
+        }
 
         card.querySelector('[data-action="quick-remove"]').addEventListener("click", (e) => {
           e.stopPropagation();
@@ -1449,6 +1648,7 @@
       tracks.push({
         song: "NUEVA CANCIÓN",
         artist: "Artista Invitado",
+        youtube: "",
         note: "Obra añadida a la selección editorial.",
         image: sampleImg
       });
@@ -1477,6 +1677,7 @@
 
       document.getElementById("editSongInput").value = item.song;
       document.getElementById("editArtistInput").value = item.artist;
+      document.getElementById("editYoutubeInput").value = item.youtube || "";
       document.getElementById("editUrlInput").value = item.image;
       document.getElementById("editFileInput").value = "";
 
@@ -1512,10 +1713,12 @@
       if (activeCardIndex === null) return;
       const newSong = document.getElementById("editSongInput").value.trim() || "SIN TÍTULO";
       const newArtist = document.getElementById("editArtistInput").value.trim() || "Artista";
+      const newYoutube = document.getElementById("editYoutubeInput").value.trim();
       const newUrl = document.getElementById("editUrlInput").value.trim();
 
       tracks[activeCardIndex].song = newSong;
       tracks[activeCardIndex].artist = newArtist;
+      tracks[activeCardIndex].youtube = newYoutube;
       if (newUrl) tracks[activeCardIndex].image = newUrl;
 
       renderSetlist();
@@ -1638,7 +1841,262 @@
       applyConfig();
     });
 
-    // Generacion de codigo exportable en 1 linea (sin reproductor, sin footer y sin etiquetas h1/h2)
+    // =========================================================================
+    // INTEGRACIÓN SPOTIFY OAUTH 2.0 PKCE (Client ID oculto)
+    // =========================================================================
+    const spRedirectUriInput = document.getElementById("spotifyRedirectUri");
+    const spPlaylistNameInput = document.getElementById("spotifyPlaylistName");
+    const spVisibilitySelect = document.getElementById("spotifyVisibility");
+    const spStatusBox = document.getElementById("spotifyStatusBox");
+
+    function getCleanRedirectUri() {
+      return window.location.origin + window.location.pathname;
+    }
+
+    function setSpotifyStatus(htmlMsg, isError = false) {
+      spStatusBox.innerHTML = htmlMsg;
+      spStatusBox.classList.toggle("error", isError);
+      spStatusBox.style.display = "block";
+    }
+
+    function generateRandomString(length) {
+      const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+      const values = crypto.getRandomValues(new Uint8Array(length));
+      return values.reduce((acc, x) => acc + possible[x % possible.length], "");
+    }
+
+    async function sha256(plain) {
+      const encoder = new TextEncoder();
+      const data = encoder.encode(plain);
+      return window.crypto.subtle.digest("SHA-256", data);
+    }
+
+    function base64encode(input) {
+      return btoa(String.fromCharCode(...new Uint8Array(input)))
+        .replace(/=/g, "")
+        .replace(/\+/g, "-")
+        .replace(/\//g, "_");
+    }
+
+    document.getElementById("btnOpenSpotify").addEventListener("click", () => {
+      spRedirectUriInput.value = getCleanRedirectUri();
+      spPlaylistNameInput.value = `${config.centerTitle} — ${config.leftTitle}`;
+      spStatusBox.style.display = "none";
+      spotifyModal.classList.add("open");
+    });
+
+    document.getElementById("closeSpotifyModal").addEventListener("click", () => {
+      spotifyModal.classList.remove("open");
+    });
+
+    spotifyModal.addEventListener("click", (e) => {
+      if (e.target === spotifyModal) spotifyModal.classList.remove("open");
+    });
+
+    document.getElementById("btnCopyRedirectUri").addEventListener("click", async () => {
+      spRedirectUriInput.select();
+      try {
+        await navigator.clipboard.writeText(spRedirectUriInput.value);
+        showToast("Redirect URI copiada");
+      } catch {
+        document.execCommand("copy");
+        showToast("Redirect URI copiada");
+      }
+    });
+
+    document.getElementById("btnStartSpotifyAuth").addEventListener("click", async () => {
+      if (window.location.protocol === "file:") {
+        setSpotifyStatus(
+          "Spotify requiere una URL web (<code>https://...</code> o <code>http://localhost</code>). Sube esta página a GitHub Pages o ábrela con Live Server.",
+          true
+        );
+        return;
+      }
+
+      if (tracks.length === 0) {
+        setSpotifyStatus("No hay canciones en tu lista para exportar a Spotify.", true);
+        return;
+      }
+
+      sessionStorage.setItem(
+        "wom_spotify_pending",
+        JSON.stringify({
+          playlistName: spPlaylistNameInput.value.trim() || `${config.centerTitle} — ${config.leftTitle}`,
+          isPublic: spVisibilitySelect.value === "true",
+          tracks,
+          config
+        })
+      );
+
+      const codeVerifier = generateRandomString(64);
+      const hashed = await sha256(codeVerifier);
+      const codeChallenge = base64encode(hashed);
+      sessionStorage.setItem("wom_spotify_verifier", codeVerifier);
+
+      const scope = "playlist-modify-public playlist-modify-private";
+      const authUrl = new URL("https://accounts.spotify.com/authorize");
+      authUrl.search = new URLSearchParams({
+        response_type: "code",
+        client_id: getSpCid(),
+        scope,
+        code_challenge_method: "S256",
+        code_challenge: codeChallenge,
+        redirect_uri: getCleanRedirectUri()
+      }).toString();
+
+      window.location.href = authUrl.toString();
+    });
+
+    async function handleSpotifyCallback() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const code = urlParams.get("code");
+      const error = urlParams.get("error");
+      const pendingRaw = sessionStorage.getItem("wom_spotify_pending");
+      const codeVerifier = sessionStorage.getItem("wom_spotify_verifier");
+
+      if (!code && !error) return;
+
+      window.history.replaceState({}, document.title, getCleanRedirectUri());
+
+      if (!pendingRaw) return;
+      const pending = JSON.parse(pendingRaw);
+
+      if (pending.tracks) tracks = pending.tracks;
+      if (pending.config) {
+        config = pending.config;
+        applyConfig();
+        renderSetlist();
+      }
+
+      spRedirectUriInput.value = getCleanRedirectUri();
+      spPlaylistNameInput.value = pending.playlistName || "SET LIST";
+      spotifyModal.classList.add("open");
+
+      if (error) {
+        setSpotifyStatus(`Autorización cancelada o denegada por Spotify (${escapeHtml(error)}).`, true);
+        sessionStorage.removeItem("wom_spotify_pending");
+        sessionStorage.removeItem("wom_spotify_verifier");
+        return;
+      }
+
+      try {
+        setSpotifyStatus("Conectando con Spotify y obteniendo token...");
+
+        const tokenRes = await fetch("https://accounts.spotify.com/api/token", {
+          method: "POST",
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+          body: new URLSearchParams({
+            client_id: getSpCid(),
+            grant_type: "authorization_code",
+            code,
+            redirect_uri: getCleanRedirectUri(),
+            code_verifier: codeVerifier
+          })
+        });
+
+        const tokenData = await tokenRes.json();
+        if (!tokenRes.ok || !tokenData.access_token) {
+          throw new Error(tokenData.error_description || "No se pudo obtener el token de acceso.");
+        }
+
+        const token = tokenData.access_token;
+        const headers = {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json"
+        };
+
+        const meRes = await fetch("https://api.spotify.com/v1/me", { headers });
+        const meData = await meRes.json();
+        if (!meRes.ok || !meData.id) {
+          throw new Error("No se pudo obtener el perfil de usuario de Spotify.");
+        }
+
+        setSpotifyStatus(`Buscando ${pending.tracks.length} canciones en el catálogo de Spotify...`);
+
+        const uris = [];
+        const notFound = [];
+
+        for (const item of pending.tracks) {
+          const query = encodeURIComponent(`track:${item.song} artist:${item.artist}`);
+          const searchRes = await fetch(
+            `https://api.spotify.com/v1/search?q=${query}&type=track&limit=1`,
+            { headers }
+          );
+          const searchData = await searchRes.json();
+          const foundTrack = searchData?.tracks?.items?.[0];
+
+          if (foundTrack?.uri) {
+            uris.push(foundTrack.uri);
+          } else {
+            const fallbackQ = encodeURIComponent(`${item.song} ${item.artist}`);
+            const fbRes = await fetch(
+              `https://api.spotify.com/v1/search?q=${fallbackQ}&type=track&limit=1`,
+              { headers }
+            );
+            const fbData = await fbRes.json();
+            const fbTrack = fbData?.tracks?.items?.[0];
+            if (fbTrack?.uri) {
+              uris.push(fbTrack.uri);
+            } else {
+              notFound.push(`${item.song} — ${item.artist}`);
+            }
+          }
+        }
+
+        if (uris.length === 0) {
+          throw new Error("No se encontró ninguna de las canciones en Spotify.");
+        }
+
+        setSpotifyStatus("Creando playlist en tu biblioteca...");
+
+        const createRes = await fetch(
+          `https://api.spotify.com/v1/users/${encodeURIComponent(meData.id)}/playlists`,
+          {
+            method: "POST",
+            headers,
+            body: JSON.stringify({
+              name: pending.playlistName,
+              description: `${config.leftTitle} · ${config.rightTitle}`,
+              public: pending.isPublic
+            })
+          }
+        );
+        const playlistData = await createRes.json();
+        if (!createRes.ok || !playlistData.id) {
+          throw new Error("Error al crear la playlist en tu cuenta.");
+        }
+
+        for (let i = 0; i < uris.length; i += 100) {
+          const chunk = uris.slice(i, i + 100);
+          await fetch(
+            `https://api.spotify.com/v1/playlists/${encodeURIComponent(playlistData.id)}/tracks`,
+            {
+              method: "POST",
+              headers,
+              body: JSON.stringify({ uris: chunk })
+            }
+          );
+        }
+
+        const playlistUrl = playlistData.external_urls?.spotify || `https://open.spotify.com/playlist/${playlistData.id}`;
+        const missingNote =
+          notFound.length > 0
+            ? `<br><small style="opacity:0.85">No encontradas (${notFound.length}): ${escapeHtml(notFound.join(", "))}</small>`
+            : "";
+
+        setSpotifyStatus(
+          `¡Playlist creada con <strong>${uris.length}</strong> canciones!<br><a href="${escapeHtml(playlistUrl)}" target="_blank" rel="noopener noreferrer">Abrir "${escapeHtml(pending.playlistName)}" en Spotify ↗</a>${missingNote}`
+        );
+        showToast("Playlist creada en Spotify");
+      } catch (err) {
+        setSpotifyStatus(`Error: ${escapeHtml(err.message || "Fallo inesperado")}`, true);
+      } finally {
+        sessionStorage.removeItem("wom_spotify_pending");
+        sessionStorage.removeItem("wom_spotify_verifier");
+      }
+    }
+
+    // Generacion de codigo exportable en 1 linea (ForoActivo: sin scripts ni iframes)
     function generateSingleLineExport() {
       const borderRule =
         config.frame === "double"
@@ -1647,13 +2105,16 @@
           ? "1px solid transparent"
           : `1px solid ${hexToRgba(config.inkColor, 0.72)}`;
 
-      const cssMin = `@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600;1,700&display=swap');.setlist-poster,.setlist-poster *{box-sizing:border-box;margin:0;padding:0;font-family:'Cormorant Garamond',Georgia,serif !important}.setlist-poster{--poster-paper:${config.paperColor};--poster-ink:${config.inkColor};--poster-ink-soft:${hexToRgba(config.inkColor, 0.85)};--poster-cols:${config.cols};position:relative;width:100%;max-width:820px;margin:0 auto;padding:clamp(16px,3.6vw,30px) clamp(14px,4vw,34px) clamp(20px,4.2vw,36px);background-color:var(--poster-paper);color:var(--poster-ink);font-family:'Cormorant Garamond',Georgia,serif !important;box-shadow:0 22px 50px rgba(0,0,0,.35),inset 0 0 60px rgba(80,72,60,.14);background-image:radial-gradient(circle at 18% 22%,rgba(92,82,70,.08) 0%,transparent 45%),radial-gradient(circle at 82% 76%,rgba(65,58,50,.09) 0%,transparent 50%)}.poster-header{display:grid;grid-template-columns:1fr auto 1fr;align-items:baseline;gap:8px;padding:0 4px clamp(10px,1.8vw,14px);text-transform:uppercase}.header-left{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.56rem,1.3vw,.72rem) !important;font-weight:700;letter-spacing:.14em;text-align:left}.header-center{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.88rem,2.2vw,1.15rem) !important;font-weight:700;letter-spacing:.18em;text-align:center;line-height:1}.header-right{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.56rem,1.3vw,.72rem) !important;font-weight:700;letter-spacing:.14em;text-align:right}.poster-frame{border:${borderRule};padding:clamp(12px,2.6vw,22px) clamp(12px,2.6vw,22px) clamp(10px,2vw,16px)}.setlist-grid{display:grid;grid-template-columns:repeat(var(--poster-cols),minmax(0,1fr));column-gap:clamp(12px,2.4vw,20px);row-gap:clamp(14px,2.6vw,22px)}.track-card{display:flex;flex-direction:column;align-items:center;min-width:0}.track-artwork{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:#231e1b;box-shadow:inset 0 0 0 1px rgba(25,22,19,.25)}.track-artwork img{width:100%;height:100%;object-fit:cover;display:block;filter:${config.filter}}.track-label{width:100%;text-align:center;padding-top:8px}.track-song{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.68rem,1.45vw,.82rem) !important;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.25;word-break:break-word}.track-artist{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.74rem,1.55vw,.88rem) !important;font-style:italic;font-weight:600;letter-spacing:.03em;line-height:1.25;color:var(--poster-ink-soft);margin-top:1px}@media(max-width:720px){.setlist-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:440px){.poster-header{grid-template-columns:1fr;text-align:center;gap:4px}.header-left,.header-center,.header-right{text-align:center}.setlist-grid{grid-template-columns:1fr}}`;
+      const cssMin = `@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600;1,700&display=swap');.setlist-poster,.setlist-poster *{box-sizing:border-box;margin:0;padding:0;font-family:'Cormorant Garamond',Georgia,serif !important}.setlist-poster{--poster-paper:${config.paperColor};--poster-ink:${config.inkColor};--poster-ink-soft:${hexToRgba(config.inkColor, 0.85)};--poster-cols:${config.cols};position:relative;width:100%;max-width:820px;margin:0 auto;padding:clamp(16px,3.6vw,30px) clamp(14px,4vw,34px) clamp(20px,4.2vw,36px);background-color:var(--poster-paper);color:var(--poster-ink);font-family:'Cormorant Garamond',Georgia,serif !important;box-shadow:0 22px 50px rgba(0,0,0,.35),inset 0 0 60px rgba(80,72,60,.14);background-image:radial-gradient(circle at 18% 22%,rgba(92,82,70,.08) 0%,transparent 45%),radial-gradient(circle at 82% 76%,rgba(65,58,50,.09) 0%,transparent 50%)}.poster-header{display:grid;grid-template-columns:1fr auto 1fr;align-items:baseline;gap:8px;padding:0 4px clamp(10px,1.8vw,14px);text-transform:uppercase}.header-left{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.56rem,1.3vw,.72rem) !important;font-weight:700;letter-spacing:.14em;text-align:left}.header-center{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.88rem,2.2vw,1.15rem) !important;font-weight:700;letter-spacing:.18em;text-align:center;line-height:1}.header-right{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.56rem,1.3vw,.72rem) !important;font-weight:700;letter-spacing:.14em;text-align:right}.poster-frame{border:${borderRule};padding:clamp(12px,2.6vw,22px) clamp(12px,2.6vw,22px) clamp(10px,2vw,16px)}.setlist-grid{display:grid;grid-template-columns:repeat(var(--poster-cols),minmax(0,1fr));column-gap:clamp(12px,2.4vw,20px);row-gap:clamp(14px,2.6vw,22px)}.track-card{display:flex;flex-direction:column;align-items:center;min-width:0}.track-artwork{position:relative;width:100%;aspect-ratio:1/1;overflow:hidden;background:#231e1b;box-shadow:inset 0 0 0 1px rgba(25,22,19,.25)}.track-artwork img{width:100%;height:100%;object-fit:cover;display:block;filter:${config.filter}}.yt-play-link{position:absolute;bottom:8px;left:8px;z-index:5;width:30px;height:30px;border-radius:50%;background:rgba(18,16,14,.82);border:1px solid rgba(235,228,216,.6);color:#f3ece0 !important;text-decoration:none !important;font-family:Georgia,serif !important;font-size:.72rem !important;line-height:1;display:flex;align-items:center;justify-content:center;padding-left:2px;transition:all .2s ease}.yt-play-link:hover{background:#b9996b;color:#161412 !important;border-color:#f5efe6;transform:scale(1.06)}.track-label{width:100%;text-align:center;padding-top:8px}.track-song{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.68rem,1.45vw,.82rem) !important;font-weight:700;letter-spacing:.12em;text-transform:uppercase;line-height:1.25;word-break:break-word}.track-artist{font-family:'Cormorant Garamond',Georgia,serif !important;font-size:clamp(.74rem,1.55vw,.88rem) !important;font-style:italic;font-weight:600;letter-spacing:.03em;line-height:1.25;color:var(--poster-ink-soft);margin-top:1px}@media(max-width:720px){.setlist-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:440px){.poster-header{grid-template-columns:1fr;text-align:center;gap:4px}.header-left,.header-center,.header-right{text-align:center}.setlist-grid{grid-template-columns:1fr}}`;
 
       const cardsMin = tracks
-        .map(
-          (t) =>
-            `<article class="track-card"><figure class="track-artwork"><img src="${escapeHtml(t.image)}" alt="${escapeHtml(t.song)} — ${escapeHtml(t.artist)}"></figure><div class="track-label"><p class="track-song">${escapeHtml(t.song)}</p><p class="track-artist">${escapeHtml(t.artist)}</p></div></article>`
-        )
+        .map((t) => {
+          const ytUrl = normalizeYouTubeUrl(t.youtube);
+          const linkBtn = ytUrl
+            ? `<a class="yt-play-link" href="${escapeHtml(ytUrl)}" target="_blank" rel="noopener noreferrer" aria-label="Escuchar ${escapeHtml(t.song)}">▶</a>`
+            : "";
+          return `<article class="track-card"><figure class="track-artwork"><img src="${escapeHtml(t.image)}" alt="${escapeHtml(t.song)} — ${escapeHtml(t.artist)}">${linkBtn}</figure><div class="track-label"><p class="track-song">${escapeHtml(t.song)}</p><p class="track-artist">${escapeHtml(t.artist)}</p></div></article>`;
+        })
         .join("");
 
       const htmlMin = `<div class="setlist-poster"><header class="poster-header"><p class="header-left">${escapeHtml(config.leftTitle)}</p><p class="header-center">${escapeHtml(config.centerTitle)}</p><p class="header-right">${escapeHtml(config.rightTitle)}</p></header><section class="poster-frame"><div class="setlist-grid">${cardsMin}</div></section></div>`;
@@ -1679,7 +2140,7 @@
       area.select();
       try {
         await navigator.clipboard.writeText(area.value);
-        showToast("Playlist + style en 1 línea copiada al portapapeles");
+        showToast("Playlist para ForoActivo copiada al portapapeles");
       } catch {
         document.execCommand("copy");
         showToast("Código copiado al portapapeles");
@@ -1689,6 +2150,7 @@
     // Inicializar
     applyConfig();
     renderSetlist();
+    handleSpotifyCallback();
   </script>
 </body>
 </html>
